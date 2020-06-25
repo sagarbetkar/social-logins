@@ -1,0 +1,24 @@
+{
+  "name": "social_logins",
+  "version": "1.0.0",
+  "description": "Social Logins",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sagar Betkar",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.9.20",
+    "morgan": "^1.10.0",
+    "querystring": "^0.2.0",
+    "randomstring": "^1.1.5"
+  }
+}
