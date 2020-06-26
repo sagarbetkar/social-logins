@@ -67,7 +67,7 @@ app.get("/linkedin", async (req, res) => {
       scope: "r_liteprofile r_emailaddress",
     });
   // redirect user with express
-  res.redirect(linkedinAuthUrl);
+  return res.redirect(linkedinAuthUrl);
 });
 
 app.get("/bitly", (req, res) => {
@@ -80,7 +80,7 @@ app.get("/bitly", (req, res) => {
       state: req.session.csrf_string,
       redirect_uri: process.env.Bitly_Redirect_Uri,
     });
-  res.redirect(bitlyAuthorizeURL);
+  return res.redirect(bitlyAuthorizeURL);
 });
 app.get("/twitter", async (req, res) => {
   await axios
@@ -95,7 +95,7 @@ app.get("/twitter", async (req, res) => {
       const twitterAuthorizeUrl = `https://api.twitter.com/oauth/authorize?oauth_token=${
         result.data.split("&")[0].split("=")[1]
       }`;
-      res.redirect(twitterAuthorizeUrl);
+      return res.redirect(twitterAuthorizeUrl);
     })
     .catch((error) => console.log(error));
 });
@@ -115,6 +115,7 @@ app.get("/twitterRedirect", async (req, res) => {
       console.log(response.data);
       console.log("Your Access Token: " + response.data);
       req.session.access_token = response.data.access_token;
+      return response.data;
     })
     .catch((error) => {
       console.log(error);
@@ -141,6 +142,7 @@ app.get("/linkedinRedirect", async (req, res) => {
         console.log(response.data);
         console.log("Your Access Token: " + response.data);
         req.session.access_token = response.data.access_token;
+        // return response.data;
         res.redirect("/user");
       })
       .catch((error) => {
@@ -173,7 +175,8 @@ app.get("/bitlyRedirect", async (req, res) => {
         console.log(response.data);
         console.log("Your Access Token: " + response.data);
         req.session.access_token = response.data.access_token;
-        res.redirect("/user");
+        return response.data;
+        // res.redirect("/user");
       })
       .catch((error) => {
         console.log(error);
@@ -198,6 +201,7 @@ app.get("/user", (req, res) => {
   })
     .then((result) => {
       console.log(result.data);
+      Window.close();
       return result.data;
     })
     .catch((error) => {

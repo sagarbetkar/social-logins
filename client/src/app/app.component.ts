@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './services/data.service';
+import { NotificationService } from './services/notification.service';
 declare var FB: any;
 
 @Component({
@@ -10,7 +11,10 @@ declare var FB: any;
 export class AppComponent implements OnInit {
   title = 'client';
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private notifyService: NotificationService
+  ) {}
 
   ngOnInit() {
     (window as any).fbAsyncInit = function () {
@@ -45,10 +49,14 @@ export class AppComponent implements OnInit {
     console.log('submit login to facebook');
     // FB.login();
     FB.login((response) => {
-      console.log('submitLogin', response);
+      // console.log('submitLogin', response);
       if (response.authResponse) {
-        console.log(response.authResponse);
+        // console.log(response.authResponse);
         //login success
+        this.notifyService.showSuccess(
+          'User logged in successfully',
+          'Facebook Login'
+        );
         //login success code here
         //redirect to home page
       } else {

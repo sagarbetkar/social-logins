@@ -21,7 +21,7 @@ export class DataService {
       .toPromise(); */
     console.log('Hit');
     window.open(
-      'https://7699e7a4da58.ngrok.io/linkedin',
+      'https://7928fd8f4cc3.ngrok.io/linkedin',
       'LinkedIn Login',
       `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
 width=0,height=0,left=-1000,top=-1000`
@@ -30,7 +30,7 @@ width=0,height=0,left=-1000,top=-1000`
 
   bitlyLogin() {
     window.open(
-      `https://7699e7a4da58.ngrok.io/bitly`,
+      `https://7928fd8f4cc3.ngrok.io/bitly`,
       'Bitly Login',
       `crollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
 width = 0, height = 0, left = -1000, top = -1000`
@@ -39,7 +39,7 @@ width = 0, height = 0, left = -1000, top = -1000`
 
   twitterLogin() {
     window.open(
-      `https://7699e7a4da58.ngrok.io/twitter`,
+      `https://7928fd8f4cc3.ngrok.io/twitter`,
       'Twitter Login',
       `crollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
 width = 0, height = 0, left = -1000, top = -1000`
