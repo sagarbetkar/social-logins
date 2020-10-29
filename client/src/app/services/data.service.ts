@@ -45,4 +45,15 @@ width = 0, height = 0, left = -1000, top = -1000`
 width = 0, height = 0, left = -1000, top = -1000`
     );
   }
+
+  facebookLongLivedAccessToken(accessToken) {
+    return this.http.get('https://graph.facebook.com/v7.0/oauth/access_token', {
+      params: {
+        grant_type: 'fb_exchange_token',
+        client_id: secretDetails.Facebook_App_Id,
+        client_secret: secretDetails.Facebook_App_secret,
+        fb_exchange_token: accessToken,
+      },
+    });
+  }
 }

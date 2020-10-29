@@ -1,19 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { DataService } from './services/data.service';
 import { NotificationService } from './services/notification.service';
+import { HttpClient } from '@angular/common/http';
 declare var FB: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   title = 'client';
-
+  facebook_token: any = {
+    first_name: 'Sagar',
+    last_name: 'Betkar',
+    access_token: null,
+  };
   constructor(
     private dataService: DataService,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -49,9 +61,20 @@ export class AppComponent implements OnInit {
     console.log('submit login to facebook');
     // FB.login();
     FB.login((response) => {
-      // console.log('submitLogin', response);
+      console.log('submitLogin', response);
       if (response.authResponse) {
-        // console.log(response.authResponse);
+        this.dataService
+          .facebookLongLivedAccessToken(response.authResponse.accessToken)
+          .subscribe(
+            (token: any) => {
+              console.log(token);
+              this.facebook_token.access_token = token.access_token;
+              this.cd.markForCheck();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         //login success
         this.notifyService.showSuccess(
           'User logged in successfully',

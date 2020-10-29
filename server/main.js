@@ -209,6 +209,26 @@ app.get("/user", (req, res) => {
     });
 });
 
+app.get("facebook_long_lived_access_token", (req, res) => {
+  axios({
+    url: "https://graph.facebook.com/v7.0/oauth/access_token",
+    method: "get",
+    params: {
+      grant_type: "fb_exchange_token",
+      client_id: process.env.Facebook_App_Id,
+      client_secret: process.env.Facebook_App_secret,
+      fb_exchange_token: req.query.exchange_token,
+    },
+  })
+    .then((result) => {
+      console.log(result.data);
+      return result.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 /**
  * Error Handler
  */
